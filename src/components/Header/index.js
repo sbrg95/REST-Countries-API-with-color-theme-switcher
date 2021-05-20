@@ -1,7 +1,11 @@
-import { Container, Title, ThemeToggle, ThemeIcon } from './styles';
+import { Container, Inner, Title, ThemeToggle, ThemeIcon } from './styles';
 
 export default function Header({ children, ...props }) {
-  return <Container {...props}>{children}</Container>;
+  return (
+    <Container {...props}>
+      <Inner>{children}</Inner>
+    </Container>
+  );
 }
 
 Header.Title = function HeaderTitle({ children, ...props }) {

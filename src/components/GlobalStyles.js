@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     --fw-100: 300;
     --fw-200: 600;
     --fw-300: 800;
+    --fs-100: .875rem;
+    --fs-200: 1rem;
+    --fs-300: 1.2rem;
+    --fs-400: 1.4rem;
   }
 
   *,
@@ -14,12 +18,18 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+ 
+  p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
   h1,
   h2,
   h3,
-  h4,
-  p {
+  h4 {
     margin: 0;
+    line-height: 1.2;
   }
 
   ul[class] {
@@ -31,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: var(--ff-main);
+    font-weight: var(--fw-100);
   }
 `;
 

@@ -1,39 +1,40 @@
-import { GlobalStyles, Header, Home } from './components';
+import { useEffect, useState } from 'react';
+import { GlobalStyles } from './components';
+import { Header } from './containers';
+import { Home } from './pages';
 import { useLocalStorageState } from './hooks';
 import { ThemeProvider } from 'styled-components';
-
-function getTheme(theme) {
-  return {
-    name: theme,
-    color: {
-      background: theme === 'light' ? 'hsl(0, 0%, 98%)' : 'hsl(207, 26%, 17%)',
-      element: theme === 'light' ? '#fff' : 'hsl(209, 23%, 22%)',
-      text: theme === 'light' ? 'hsl(200, 15%, 8%)' : '#fff',
-      input: theme === 'light' ? 'hsl(0, 0%, 52%)' : '#fff',
-      strok: theme === 'light' ? 'hsl(200, 15%, 8%)' : 'hsl(207, 26%, 17%)',
-    },
-  };
-}
+import { getTheme, fetchCountries } from './utils/functions';
 
 function App() {
   const [theme, setTheme] = useLocalStorageState('theme', 'dark');
+  const [countries, setCountries] = useState({
+    data: null,
+    status: 'idle',
+    error: null,
+  });
 
   function toggleTheme() {
     setTheme(theme === 'light' ? 'dark' : 'light');
   }
 
+  useEffect(() => {
+    setCountries({ status: 'pending' });
+    fetchCountries()
+      .then((data) => {
+        setCountries({ status: 'resolved', data });
+      })
+      .catch((error) => {
+        setCountries({ status: 'resolved', error });
+      });
+  }, []);
+
   return (
     <>
       <ThemeProvider theme={getTheme(theme)}>
         <GlobalStyles theme={theme} />
-        <Header>
-          <Header.Title>Where in the world?</Header.Title>
-          <Header.ThemeToggle onClick={toggleTheme}>
-            <Header.ThemeIcon theme={theme} />
-            {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-          </Header.ThemeToggle>
-        </Header>
-        <Home />
+        <Header theme={theme} toggleTheme={toggleTheme} />
+        <Home countries={countries} />
       </ThemeProvider>
     </>
   );
