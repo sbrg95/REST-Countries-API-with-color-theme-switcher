@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={getTheme(theme)}>
-        <GlobalStyles theme={theme} />
+        <GlobalStyles />
         <Header theme={theme} toggleTheme={toggleTheme} />
         <Home countries={countries} />
       </ThemeProvider>

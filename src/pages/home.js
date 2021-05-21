@@ -1,5 +1,10 @@
+import { Home } from '../components';
 import { Countries } from '../containers';
 
-export default function Home({ countries }) {
-  return <Countries countries={countries}></Countries>;
+export default function HomePage({ countries }) {
+  return (
+    <Home>
+      <Countries countries={countries} />
+    </Home>
+  );
 }

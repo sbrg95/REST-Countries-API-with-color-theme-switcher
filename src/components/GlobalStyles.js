@@ -21,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
  
   p {
     margin: 0;
-    line-height: 1.8;
   }
 
   h1,
@@ -30,6 +29,14 @@ const GlobalStyle = createGlobalStyle`
   h4 {
     margin: 0;
     line-height: 1.2;
+  }
+
+  input, select, a, button {
+    color: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    background-color: inherit;
   }
 
   ul[class] {
@@ -42,6 +49,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: var(--ff-main);
     font-weight: var(--fw-100);
+    line-height: 1.8;
   }
 `;
 

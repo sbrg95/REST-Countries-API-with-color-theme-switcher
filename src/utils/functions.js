@@ -11,10 +11,8 @@ export function getTheme(theme) {
   };
 }
 
-export function fetchCountries(region) {
-  const url = region
-    ? `https://restcountries.eu/rest/v2/region/${region}`
-    : 'https://restcountries.eu/rest/v2/all';
+export function fetchCountries() {
+  const url = 'https://restcountries.eu/rest/v2/all';
 
   return fetch(url).then(async (response) => {
     const countries = await response.json();
@@ -24,4 +22,28 @@ export function fetchCountries(region) {
 
 export function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}
+
+export function paginateArray(array, limit) {
+  const paginated = [];
+  const maxPages = Math.ceil(array.length / limit);
+  let current = { page: 1, data: [] };
+
+  if (array.length === 0) {
+    return [current];
+  }
+
+  array.forEach((item, index) => {
+    current.data = [...current.data, item];
+    if ((index + 1) % limit === 0) {
+      paginated.push(current);
+      current = { page: current.page + 1, data: [] };
+    }
+  });
+
+  if (current.page === maxPages) {
+    paginated.push(current);
+  }
+
+  return paginated;
 }
