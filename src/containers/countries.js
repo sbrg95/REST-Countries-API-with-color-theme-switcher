@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardList, Filters, LoadPage } from '../components';
+import { Card, CardList, Filters, LoadPage, Loader } from '../components';
 import { formatNumber, paginateArray } from '../utils/functions';
 
 export default function Countries({ countries }) {
@@ -10,31 +10,22 @@ export default function Countries({ countries }) {
   const limit = 8;
 
   if (status === 'pending' || status === 'idle') {
-    return <div>Loading</div>;
+    return (
+      <>
+        <Filters>
+          <Filters.Search type='text' placeholder='Search for a country...' />
+          <Filters.Select label='Filter by Region' />
+        </Filters>
+        <CardList>
+          <LoaderCard />
+        </CardList>
+      </>
+    );
   }
 
   if (status === 'error') {
     throw error;
   }
-
-  function handleRegion(region) {
-    setPage(1);
-    setRegion(region);
-  }
-
-  function handleSearch(event) {
-    setPage(1);
-    setSearch(event.target.value);
-  }
-
-  const options = [
-    { value: 'all', label: 'All Regions' },
-    { value: 'Africa', label: 'Africa' },
-    { value: 'Americas', label: 'Americas' },
-    { value: 'Asia', label: 'Asia' },
-    { value: 'Europe', label: 'Europe' },
-    { value: 'Oceania', label: 'Oceania' },
-  ];
 
   const filtredResult = data.filter((country) => {
     let filters = { region: true, search: true };
@@ -59,9 +50,35 @@ export default function Countries({ countries }) {
   for (let i = 0; i < page; i++) {
     finalResult = [...finalResult, ...paginatedResult[i].data];
   }
+
+  function handleRegion(region) {
+    setPage(1);
+    setRegion(region);
+  }
+
+  function handleSearch(event) {
+    setPage(1);
+    setSearch(event.target.value);
+  }
+
   function loadMore() {
     setPage(page + 1);
+    setTimeout(() => {
+      window.scrollBy({
+        top: window.innerHeight - 150,
+        behavior: 'smooth',
+      });
+    }, 200);
   }
+
+  const options = [
+    { value: 'all', label: 'All Regions' },
+    { value: 'Africa', label: 'Africa' },
+    { value: 'Americas', label: 'Americas' },
+    { value: 'Asia', label: 'Asia' },
+    { value: 'Europe', label: 'Europe' },
+    { value: 'Oceania', label: 'Oceania' },
+  ];
 
   return (
     <>
@@ -79,30 +96,13 @@ export default function Countries({ countries }) {
           label='Filter by Region'
         />
       </Filters>
+
       {finalResult.length === 0 ? (
         <h2 style={{ textAlign: 'center' }}>No Countries Found...</h2>
       ) : (
         <CardList>
           {finalResult.map((country) => (
-            <Card key={country.name}>
-              <Card.Image
-                src={country.flag}
-                alt={`${country.name} country flag`}
-              />
-              <Card.Body>
-                <Card.Title>{country.name}</Card.Title>
-                <Card.Description>
-                  <strong>Population:</strong>{' '}
-                  {formatNumber(country.population)}
-                </Card.Description>
-                <Card.Description>
-                  <strong>Region:</strong> {country.region}
-                </Card.Description>
-                <Card.Description>
-                  <strong>Capital:</strong> {country.capital}
-                </Card.Description>
-              </Card.Body>
-            </Card>
+            <CardItem key={country.name} country={country} />
           ))}
         </CardList>
       )}
@@ -113,5 +113,30 @@ export default function Countries({ countries }) {
         </LoadPage>
       )}
     </>
+  );
+}
+
+function LoaderCard() {
+  return Array.from(Array(8).keys()).map((i) => <Loader.Card key={i} />);
+}
+
+function CardItem({ country }) {
+  const { name, flag, population, region, capital } = country;
+  return (
+    <Card>
+      <Card.Image src={flag} alt={`${name} country flag`} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <Card.Description>
+          <strong>Population:</strong> {formatNumber(population)}
+        </Card.Description>
+        <Card.Description>
+          <strong>Region:</strong> {region}
+        </Card.Description>
+        <Card.Description>
+          <strong>Capital:</strong> {capital}
+        </Card.Description>
+      </Card.Body>
+    </Card>
   );
 }

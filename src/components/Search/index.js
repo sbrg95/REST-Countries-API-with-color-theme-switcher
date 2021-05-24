@@ -1,6 +1,8 @@
 import { Container, Label, Input, Image } from './styles';
+import { useState } from 'react';
 
 export default function Search(props) {
+  const [value, setValue] = useState('');
   return (
     <Container>
       <Label>
@@ -24,7 +26,11 @@ export default function Search(props) {
             />
           </svg>
         </Image>
-        <Input {...props} />
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          {...props}
+        />
       </Label>
     </Container>
   );

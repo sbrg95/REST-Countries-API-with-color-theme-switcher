@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.main`
   padding: 0 2rem;
-  color: ${({ theme }) => theme.color.text};
-  background-color: ${({ theme }) => theme.color.background};
 
   @media screen and (max-width: 600px) {
     padding: 0 1rem;

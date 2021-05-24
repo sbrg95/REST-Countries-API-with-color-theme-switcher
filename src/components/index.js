@@ -7,3 +7,4 @@ export { default as Select } from './Select';
 export { default as Search } from './Search';
 export { default as Filters } from './Filters';
 export { default as LoadPage } from './LoadPage';
+export { default as Loader } from './Loader';

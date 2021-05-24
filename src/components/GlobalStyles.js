@@ -46,6 +46,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    color: ${({ theme }) => theme.color.text};
+    background-color: ${({ theme }) => theme.color.background};
     margin: 0;
     font-family: var(--ff-main);
     font-weight: var(--fw-100);
