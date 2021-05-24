@@ -10,7 +10,8 @@ Loader.Card = function LoaderCard({ children, ...props }) {
       width={285}
       height={345}
       viewBox='0 0 285 345'
-      foregroundColor='#ecebeb'
+      // foregroundColor='red'
+      // foregroundColor='#ecebeb'
       {...props}
     >
       <rect x='0' y='0' rx='0' ry='0' width='285' height='166' />
