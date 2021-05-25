@@ -40,7 +40,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ul[class] {
-    margin: 0;
     padding: 0;
     list-style: none;
   }

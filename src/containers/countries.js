@@ -121,9 +121,9 @@ function LoaderCard() {
 }
 
 function CardItem({ country }) {
-  const { name, flag, population, region, capital } = country;
+  const { name, flag, population, region, capital, alpha3Code } = country;
   return (
-    <Card>
+    <Card to={`/detail/${alpha3Code}`}>
       <Card.Image src={flag} alt={`${name} country flag`} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>

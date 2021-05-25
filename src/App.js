@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { GlobalStyles } from './components';
 import { Header } from './containers';
-import { Home } from './pages';
+import { Home, Detail } from './pages';
 import { useLocalStorageState } from './hooks';
 import { ThemeProvider } from 'styled-components';
 import { getTheme, fetchCountries } from './utils/functions';
@@ -25,7 +26,7 @@ function App() {
         setCountries({ status: 'resolved', data });
       })
       .catch((error) => {
-        setCountries({ status: 'resolved', error });
+        setCountries({ status: 'rejected', error });
       });
   }, []);
 
@@ -33,8 +34,17 @@ function App() {
     <>
       <ThemeProvider theme={getTheme(theme)}>
         <GlobalStyles theme={getTheme(theme)} />
-        <Header theme={theme} toggleTheme={toggleTheme} />
-        <Home countries={countries} />
+        <Router>
+          <Header theme={theme} toggleTheme={toggleTheme} />
+          <Switch>
+            <Route path='/detail/:country'>
+              <Detail />
+            </Route>
+            <Route path='/'>
+              <Home countries={countries} />
+            </Route>
+          </Switch>
+        </Router>
       </ThemeProvider>
     </>
   );

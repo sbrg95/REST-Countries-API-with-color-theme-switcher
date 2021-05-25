@@ -1,10 +1,12 @@
 export { default as GlobalStyles } from './GlobalStyles';
 export { default as Header } from './Header';
 export { default as Home } from './Home';
+export { default as Detail } from './Detail';
 export { default as Card } from './Card';
 export { default as CardList } from './CardList';
 export { default as Select } from './Select';
 export { default as Search } from './Search';
+export { default as Button } from './Button';
 export { default as Filters } from './Filters';
 export { default as LoadPage } from './LoadPage';
 export { default as Loader } from './Loader';

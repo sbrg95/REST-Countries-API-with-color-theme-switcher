@@ -20,6 +20,18 @@ export function fetchCountries() {
   });
 }
 
+export function fetchCountry(code) {
+  const url = `https://restcountries.eu/rest/v2/alpha/${code}`;
+
+  return fetch(url).then(async (response) => {
+    const country = await response.json();
+    if (response.status !== 200) {
+      throw country;
+    }
+    return country;
+  });
+}
+
 export function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
