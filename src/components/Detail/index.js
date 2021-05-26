@@ -9,8 +9,8 @@ import {
   List,
   Item,
   ItemTitle,
+  Button,
 } from './styles';
-import Button from '../Button';
 
 export default function Detail({ children, ...props }) {
   return (
@@ -69,4 +69,8 @@ Detail.Item = function DetailItem({ children, ...props }) {
 
 Detail.ItemTitle = function DetailItemTitle({ children, ...props }) {
   return <ItemTitle {...props}>{children}</ItemTitle>;
+};
+
+Detail.Button = function DetailButton({ children, ...props }) {
+  return <Button {...props}>{children}</Button>;
 };
