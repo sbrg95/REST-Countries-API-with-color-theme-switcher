@@ -1,4 +1,11 @@
-import { Container, Image, Title, Description, Body } from './styles';
+import {
+  Container,
+  Image,
+  Title,
+  Description,
+  DescriptionTitle,
+  Body,
+} from './styles';
 
 export default function Card({ children, ...props }) {
   return <Container {...props}>{children}</Container>;
@@ -14,6 +21,10 @@ Card.Title = function CardTitle({ children, ...props }) {
 
 Card.Description = function CardDescription({ children, ...props }) {
   return <Description {...props}>{children}</Description>;
+};
+
+Card.DescriptionTitle = function CardDescriptionTitle({ children, ...props }) {
+  return <DescriptionTitle {...props}>{children}</DescriptionTitle>;
 };
 
 Card.Body = function CardBody({ children, ...props }) {

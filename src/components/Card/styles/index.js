@@ -28,8 +28,8 @@ export const Title = styled.h2`
 
 export const Description = styled.p`
   font-size: var(--fs-100);
+`;
 
-  & strong {
-    font-weight: var(--fw-200);
-  }
+export const DescriptionTitle = styled.span`
+  font-weight: var(--fw-200);
 `;

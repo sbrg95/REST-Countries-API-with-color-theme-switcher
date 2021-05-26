@@ -123,18 +123,21 @@ function LoaderCard() {
 function CardItem({ country }) {
   const { name, flag, population, region, capital, alpha3Code } = country;
   return (
-    <Card to={`/detail/${alpha3Code}`}>
+    <Card to={`/detail/${alpha3Code.toLowerCase()}`}>
       <Card.Image src={flag} alt={`${name} country flag`} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Description>
-          <strong>Population:</strong> {formatNumber(population)}
+          <Card.DescriptionTitle>Population: </Card.DescriptionTitle>
+          {formatNumber(population)}
         </Card.Description>
         <Card.Description>
-          <strong>Region:</strong> {region}
+          <Card.DescriptionTitle>Region: </Card.DescriptionTitle>
+          {region}
         </Card.Description>
         <Card.Description>
-          <strong>Capital:</strong> {capital}
+          <Card.DescriptionTitle>Capital: </Card.DescriptionTitle>
+          {capital}
         </Card.Description>
       </Card.Body>
     </Card>

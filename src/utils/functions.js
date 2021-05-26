@@ -22,13 +22,23 @@ export function fetchCountries() {
 
 export function fetchCountry(code) {
   const url = `https://restcountries.eu/rest/v2/alpha/${code}`;
+  return fetchUrl(url);
+}
 
+export function fetchBorders(borders) {
+  const url = `https://restcountries.eu/rest/v2/alpha?codes=${borders.join(
+    ';'
+  )}`;
+  return fetchUrl(url);
+}
+
+function fetchUrl(url) {
   return fetch(url).then(async (response) => {
-    const country = await response.json();
+    const res = await response.json();
     if (response.status !== 200) {
-      throw country;
+      throw res;
     }
-    return country;
+    return res;
   });
 }
 

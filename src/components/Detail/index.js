@@ -10,6 +10,10 @@ import {
   Item,
   ItemTitle,
   Button,
+  Border,
+  BorderTitle,
+  BorderList,
+  BorderItem,
 } from './styles';
 
 export default function Detail({ children, ...props }) {
@@ -73,4 +77,17 @@ Detail.ItemTitle = function DetailItemTitle({ children, ...props }) {
 
 Detail.Button = function DetailButton({ children, ...props }) {
   return <Button {...props}>{children}</Button>;
+};
+
+Detail.Border = function DetailBorder({ children, ...props }) {
+  return <Border {...props}>{children}</Border>;
+};
+Detail.BorderTitle = function DetailBorderTitle({ children, ...props }) {
+  return <BorderTitle {...props}>{children}</BorderTitle>;
+};
+Detail.BorderList = function DetailBorderList({ children, ...props }) {
+  return <BorderList {...props}>{children}</BorderList>;
+};
+Detail.BorderItem = function DetailBorderItem({ children, ...props }) {
+  return <BorderItem {...props}>{children}</BorderItem>;
 };

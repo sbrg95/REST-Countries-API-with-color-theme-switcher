@@ -85,6 +85,7 @@ export const Lists = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.5rem 8rem;
+  margin-bottom: 1rem;
 
   @media screen and (max-width: 1250px) {
     gap: 0.5rem 4rem;
@@ -111,3 +112,24 @@ export const Button = styled(Link)`
     0 -1px 5px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 `;
+
+export const Border = styled.div`
+  font-size: var(--fs-100);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+export const BorderTitle = styled.div`
+  font-weight: var(--fw-200);
+  margin-right: 0.5rem;
+`;
+
+export const BorderList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const BorderItem = styled(Button)``;
