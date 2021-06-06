@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Detail } from '../components';
+import { Detail, Loader } from '../components';
 import { fetchCountry, fetchBorders, formatNumber } from '../utils/functions';
 
 export default function DetailContainer() {
@@ -32,7 +32,18 @@ export default function DetailContainer() {
   }, [countryCode]);
 
   if (countryRes.status === 'pending' || countryRes.status === 'idle') {
-    return <div>Loading...</div>;
+    return (
+      <Loader.Detail>
+        <Loader.Image />
+        <Loader.Body>
+          <Loader.Title />
+          <Loader.Lists>
+            <Loader.List />
+            <Loader.List />
+          </Loader.Lists>
+        </Loader.Body>
+      </Loader.Detail>
+    );
   }
 
   const country = countryRes.data;
