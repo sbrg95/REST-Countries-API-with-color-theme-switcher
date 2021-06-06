@@ -33,6 +33,10 @@ export const Body = styled.div`
   align-items: flex-start;
   gap: 8rem;
 
+  @media screen and (max-width: 1250px) {
+    gap: 6rem;
+  }
+
   @media screen and (max-width: 1024px) {
     gap: 4rem;
   }
@@ -68,7 +72,7 @@ export const Image = styled.div`
 export const Description = styled.div`
   flex: 1;
   max-width: 30rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -84,7 +88,7 @@ export const Lists = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 0.5rem 8rem;
+  gap: 0.5rem 6rem;
   margin-bottom: 1rem;
 
   @media screen and (max-width: 1250px) {
@@ -92,7 +96,10 @@ export const Lists = styled.div`
   }
 `;
 
-export const List = styled.ul``;
+export const List = styled.ul`
+  flex: 1;
+  min-width: 8rem;
+`;
 export const Item = styled.li``;
 
 export const ItemTitle = styled.span`
