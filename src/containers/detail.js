@@ -5,7 +5,7 @@ import { fetchCountry, fetchBorders, formatNumber } from '../utils/functions';
 
 export default function DetailContainer() {
   const [countryRes, setCountryRes] = useState({ status: 'idle' });
-  const [bordersRes, setBordersRes] = useState({ status: 'idle' });
+  const [bordersRes, setBordersRes] = useState({ data: [], status: 'idle' });
   const countryCode = useParams().country;
 
   useEffect(() => {
@@ -22,6 +22,8 @@ export default function DetailContainer() {
             .catch((error) => {
               setBordersRes({ status: 'rejected', error });
             });
+        } else {
+          setBordersRes({ status: 'resolved', data: [] });
         }
       })
       .catch((error) => {
@@ -34,7 +36,7 @@ export default function DetailContainer() {
   }
 
   const country = countryRes.data;
-  const borders = bordersRes.data ? bordersRes.data : [];
+  const borders = bordersRes.data;
 
   return (
     <Detail>
@@ -87,20 +89,22 @@ export default function DetailContainer() {
 
           <Detail.Border>
             <Detail.BorderTitle>Border Countries:</Detail.BorderTitle>
-            {borders.length > 0 ? (
-              <Detail.BorderList>
-                {borders.map(({ name, alpha3Code }) => (
-                  <Detail.BorderItem
-                    key={name}
-                    to={`/detail/${alpha3Code.toLowerCase()}`}
-                  >
-                    {name}
-                  </Detail.BorderItem>
-                ))}
-              </Detail.BorderList>
-            ) : (
-              <div>None</div>
-            )}
+            {bordersRes.status === 'resolved' ? (
+              borders.length > 0 ? (
+                <Detail.BorderList>
+                  {borders.map(({ name, alpha3Code }) => (
+                    <Detail.BorderItem
+                      key={name}
+                      to={`/detail/${alpha3Code.toLowerCase()}`}
+                    >
+                      {name}
+                    </Detail.BorderItem>
+                  ))}
+                </Detail.BorderList>
+              ) : (
+                <div>None</div>
+              )
+            ) : null}
           </Detail.Border>
         </Detail.Description>
       </Detail.Body>
